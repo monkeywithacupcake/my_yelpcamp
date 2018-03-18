@@ -1,18 +1,45 @@
 const express = require('express');
-
+const bodyParser = require('body-parser');
 const app = express(); // calling express() creates a new express app
-
+const campgrounds = [
+    {
+        name: 'Forest Star',
+        image:
+            'https://images.unsplash.com/photo-1502795147815-88376c4e38f9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cbf011a53e614c51bd0376b1e122cbcf&auto=format&fit=crop&w=750&q=80'
+    },
+    {
+        name: 'Two Forks',
+        image:
+            'https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c85daa025ee04c951b6ac12fe3ba031a&auto=format&fit=crop&w=700&q=60'
+    },
+    {
+        name: 'Salmon Creek',
+        image:
+            'https://images.unsplash.com/photo-1505950476988-702d4a1af500?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc26a44848d29601da74b5d2968b15da&auto=format&fit=crop&w=700&q=60'
+    }
+];
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
     res.render('landing');
 });
 app.get('/campgrounds', function(req, res) {
-    const campgrounds = [{name: "Forest Star", image:"https://images.unsplash.com/photo-1502795147815-88376c4e38f9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cbf011a53e614c51bd0376b1e122cbcf&auto=format&fit=crop&w=750&q=80"},
-    {name: "Two Forks", image:"https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c85daa025ee04c951b6ac12fe3ba031a&auto=format&fit=crop&w=700&q=60"},
-    {name: "Salmon Creek", image:"https://images.unsplash.com/photo-1505950476988-702d4a1af500?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc26a44848d29601da74b5d2968b15da&auto=format&fit=crop&w=700&q=60"}
-]
-res.render("campgrounds", {campgrounds:campgrounds});
+    res.render('campgrounds', { campgrounds: campgrounds });
+});
+
+app.get('/campgrounds/new', function(req, res) {
+    // render a form to make a new one
+    res.render('new');
+    // get data from form and add to Campgrounds
+    // redirect to campgrounds page
+});
+
+app.post('/campgrounds', function(req, res) {
+    const newname = req.body.name
+    const newimage = req.body.image
+    campgrounds.push({name: newname, image: newimage})
+    res.redirect("/campgrounds") // default redirect is a get request
 });
 
 // identify what port to pay attention to
