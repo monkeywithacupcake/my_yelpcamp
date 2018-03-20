@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <ul class="list-group">
+              <li class="list-group-item active">Info 1</li>
+              <li class="list-group-item">Smile</li>
+              <li class="list-group-item">Puppies!</li>
+              <li class="list-group-item"><a class="btn btn-info" href="/campgrounds">Back to Campgrounds</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-fluid rounded mx-auto d-block" src="<%= campground.image %>" alt="<%= campground.name %>">
+                <div class="caption">
+                    <h4 class="float-right">$9.00 per night</h4>
+                    <h4><a><%= campground.name %></a></h4>
+                    <p><%= campground.description %></p>
+                    <p class="text-info">Submited by: <%= campground.author.username %></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h4> Comments </h4>
+                </div>
+                <div class="col">
+            <a class="btn btn-success float-right" href="/campgrounds/<%= campground._id %>/comments/new">Add a Comment</a>
+                </div>
+            </div>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <% campground.comments.forEach(function(comment){ %>
+                   <li class="list-group-item"><strong> <%= comment.author.username %> </strong> <%= comment.created %><p><%= comment.text %> </p></li>
+                  <% }) %>
+               </ul>
+           </div>
+       </div>
+   </div>
+</div>
+
+<% include ../partials/footer %>

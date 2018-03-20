@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+    <h1>Login to Use YelpCamp</h1>
+    <div class="section">
+        <form action="/login" method="POST">
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputname">Username</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="username" id="inputname" placeholder="username">
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputpass">Password</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="password" id="inputpass" placeholder="password">
+            </div>
+
+            <div class="row justify-content-sm-center">
+                <div class="col-sm-auto">
+                    <button class="btn btn-primary">Register Me!</button>
+                </div>
+                <div class="col-sm-auto">
+                <a class="btn btn-danger" href="/campgrounds%>">Cancel</a>
+            </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<% include partials/footer %>
