@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const methodOverride = require('method-override');
+const flash = require('connect-flash');
+
+// models
 const Campground = require('./models/campground');
 const Comment = require('./models/comment');
 const User = require('./models/user');
@@ -34,7 +38,8 @@ const app = express(); // calling express() creates a new express app
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-
+app.use(methodOverride('_method'));
+app.use(flash()); // all to get connect-flash for flash messages // every page will display flash // before passport
 // PASSPORT CONFIG
 app.use(
     require('express-session')({
@@ -53,18 +58,20 @@ passport.deserializeUser(User.deserializeUser());
 // ROUTING
 
 // a little middle ware to pass user around app
-app.use(function(req, res, next){
+app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
-    next()
-})
+    res.locals.error= req.flash('error');
+    res.locals.success= req.flash('success');
+    next();
+});
 
 const campgroundRoutes = require('./routes/campgrounds');
 const commentRoutes = require('./routes/comments');
 const indexRoutes = require('./routes/index');
 
-app.use("/campgrounds", campgroundRoutes)
-app.use("/campgrounds/:id/comments", commentRoutes)
-app.use("/", indexRoutes)
+app.use('/campgrounds', campgroundRoutes);
+app.use('/campgrounds/:id/comments', commentRoutes);
+app.use('/', indexRoutes);
 // identify what port to pay attention to
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

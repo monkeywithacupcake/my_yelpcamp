@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+    <h1>Editing Campground:  <%= campground.name %> </h1>
+    <div class="section">
+        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputname">Name</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="campground[name]" id="inputname" value="<%= campground.name %>">
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputimg">Nice Image</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="campground[image]" id="inputimg" value="<%= campground.image %>">
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputdesc">Description</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="campground[description]" id="inputdesc" value="<%= campground.description %>">
+            </div>
+            <div class="row justify-content-sm-center">
+                <div class="col-sm-auto">
+                    <button class="btn btn-success">Save Changes</button>
+                </div>
+                <div class="col-sm-auto">
+                <a class="btn btn-danger" href="/campgrounds/<%= campground._id %>">Cancel</a>
+            </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<% include ../partials/footer %>
