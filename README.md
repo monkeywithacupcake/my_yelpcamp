@@ -14,6 +14,8 @@ I built this mostly following along with Colt and Ian on the Web Dev Bootcamp. L
 + ejs
 + bootstrap styling
 
+![campground page](/screenshots/campground_screenshot.png)
+
 ### Usage
 
 clone the repository, cd into the project directory, add a file `/config/dev.js` with the contents:
