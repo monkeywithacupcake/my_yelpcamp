@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
             req.flash('error', err.message)
             res.redirect('back');
         } else {
-            res.render('campgrounds/index', { campgrounds: allCampgrounds });
+            res.render('campgrounds/index', { campgrounds: allCampgrounds, page: 'camp' });
         }
     });
 });
@@ -33,6 +33,7 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
         {
             name: req.body.name,
             image: req.body.image,
+            price: req.body.price,
             author: author,
             description: req.body.description
         },
@@ -59,7 +60,7 @@ router.get('/:id', function(req, res) {
             } else {
                 console.log('trying to show');
                 console.log(foundCampground);
-                res.render('campgrounds/show', { campground: foundCampground });
+                res.render('campgrounds/show', { campground: foundCampground, page: 'camp' });
             }
         });
 });

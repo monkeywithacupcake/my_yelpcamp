@@ -1,0 +1,21 @@
+<% include partials/header %>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+    <h1>Forgot Password</h1>
+    <div class="section">
+        <form action="/forgot" method="POST">
+            <div class="form-group row">
+                <label class="col-sm-2" for="inputemail">Your Email</label>
+                <input class="form-control col-sm-10 col-md-8" type="text" name="email" id="inputemail" placeholder="email">
+            </div>
+            <div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Reset Password">
+			</div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<% include partials/footer %>

@@ -5,6 +5,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const keys = require('./config/keys');
 
 // models
 const Campground = require('./models/campground');
@@ -43,7 +44,7 @@ app.use(flash()); // all to get connect-flash for flash messages // every page w
 // PASSPORT CONFIG
 app.use(
     require('express-session')({
-        secret: 'dogfartssmellliketires',
+        secret: keys.secret,
         resave: false,
         saveUninitialized: false
     })
@@ -62,6 +63,7 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error= req.flash('error');
     res.locals.success= req.flash('success');
+    res.locals.page= req.page;
     next();
 });
 

@@ -85,7 +85,7 @@ router.delete('/:comment_id', middleware.checkCommentOwnership, function(req, re
             res.redirect('/campgrounds');
         } else {
             req.flash('success', 'Comment deleted')
-            res.redirect(`/campgrounds${req.params.id}`); // default redirect is a get request
+            res.redirect(`/campgrounds/${req.params.id}`); // default redirect is a get request
         }
     });
 });

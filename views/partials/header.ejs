@@ -11,7 +11,7 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="/">YelpCamp</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,10 @@
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-right">
                 <% if(!currentUser){ %>
-                    <li class="nav-item">
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
                       <a class="nav-link" href="/register">Sign Up</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>">
                       <a class="nav-link" href="/login">Log In</a>
                     </li>
                 <% } else { %>
@@ -34,14 +34,22 @@
                     <li class="nav-item">
                         <a class="nav-link text-success" href="#"> Hello <%= currentUser.username %></a>
                     </li>
+                    <li class="nav-item">
+                        <% if(currentUser.isAdmin){ %>
+                            <a class="nav-link text-success" href="#"> ADMIN </a>
+                        <% } %>
+                    </li>
                 <% } %>
 
             </ul>
             </div>
+            <% if(currentUser && page && page === 'camp'){ %>
+            <a class="btn btn-primary btn-large" href="/campgrounds/new"> Add a new campground</a>
+            <% } %>
           </div>
         </nav>
         <div class="container">
-            <% if(error && error.length > 0){ %>            
+            <% if(error && error.length > 0){ %>
                 <div class="alert alert-danger" role="alert">
                         <%= error %>
                 </div>

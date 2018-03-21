@@ -8,6 +8,7 @@ const campgroundSchema = mongoose.Schema({
         required: true,
         default: 'This is the best campground.'
     },
+    price: { type: String, required: true, default: "0.00" },
     author: {
         id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         username: { type: String }

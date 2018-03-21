@@ -15,7 +15,7 @@
             <div class="card">
               <img class="card-img-top" src="<%= campground.image %>" alt="<%= campground.name %>">
               <div class="card-body">
-                  <h4 class="float-right">$9.00 per night</h4>
+                  <h4 class="float-right">$<%= campground.price %> per night</h4>
                 <h4 class="card-title"><%= campground.name %></h4>
               </div>
               <div class="card-body">
@@ -24,7 +24,7 @@
                     <footer class="blockquote-footer"><em>Submited by: <%= campground.author.username %></em></footer>
                 </blockquote>
               </div>
-                  <% if(currentUser && campground.author.id.equals(currentUser._id)){%>
+                  <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser.isAdmin){%>
                       <div class="card-body">
                       <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit Campground</a>
                       <form class="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST"><button class="btn btn-danger btn-sm">Delete Campground</button></form>
@@ -40,7 +40,7 @@
                    <strong> <%= comment.author.username %> </strong>
                    <span class="float-right"><%= comment.created.toLocaleDateString("en-US") %></span>
                    <p><%= comment.text %> </p>
-                    <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                    <% if(currentUser && comment.author.id.equals(currentUser._id)|| currentUser.isAdmin){%>
                    <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
                    <form class="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST"><button class="btn btn-danger btn-sm">Delete</button></form>
                    <% } %>
